@@ -1,0 +1,3 @@
+# Documentation for gocardless-pro-android-sdk
+
+Coming soon ...
