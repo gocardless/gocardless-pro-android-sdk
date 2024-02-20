@@ -11,7 +11,7 @@ class App : Application() {
         super.onCreate()
 
         GoCardlessSDK.initSDK(
-            "sandbox_ReyBZA9xcVZ-ktSxjfG0Duhzr7h-c9Pjt-UTi8RI",
+            "",
             Environment.Sandbox
         )
     }
