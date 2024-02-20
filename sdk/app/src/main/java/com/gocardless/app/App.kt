@@ -1,4 +1,4 @@
-package com.gunhansancar.mvvmapp.app
+package com.gocardless.app
 
 import android.app.Application
 import com.gocardless.gocardlesssdk.GoCardlessSDK

@@ -1,4 +1,4 @@
-package com.gunhansancar.mvvmapp.ui.feature.main
+package com.gocardless.app.ui.feature.main
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -35,8 +35,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.gocardless.app.ui.theme.AppTheme
 import com.gocardless.gocardlesssdk.model.Customer
-import com.gunhansancar.mvvmapp.ui.theme.MVVMAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -48,10 +48,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-
         setContent {
-            MVVMAppTheme {
+            AppTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background

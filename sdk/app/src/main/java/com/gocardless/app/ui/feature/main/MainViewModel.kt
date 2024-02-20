@@ -1,4 +1,4 @@
-package com.gunhansancar.mvvmapp.ui.feature.main
+package com.gocardless.app.ui.feature.main
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

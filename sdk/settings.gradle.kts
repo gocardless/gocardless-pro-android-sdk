@@ -10,10 +10,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url = uri("https://aa-sdk.s3-eu-west-1.amazonaws.com/android_repo") }
     }
 }
 
-rootProject.name = "MVVMApp"
+rootProject.name = "GoCardless SDK"
 include(":app")
 include(":GoCardlessSDK")
