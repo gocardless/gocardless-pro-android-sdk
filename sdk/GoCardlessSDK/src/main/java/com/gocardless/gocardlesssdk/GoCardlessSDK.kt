@@ -3,16 +3,34 @@ package com.gocardless.gocardlesssdk
 import com.gocardless.gocardlesssdk.model.Environment
 import com.gocardless.gocardlesssdk.network.GoCardlessAPI
 import com.gocardless.gocardlesssdk.network.HeaderInterceptor
+import com.gocardless.gocardlesssdk.service.BillingRequestService
 import com.gocardless.gocardlesssdk.service.CustomerService
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * The main entry point for the GoCardless Android SDK.
+ *
+ * This class initializes the necessary dependencies and prepares the SDK for operation.
+ * To use the SDK, create an instance of this class and configure it with your API credentials.
+ */
 object GoCardlessSDK {
     private var initialised: Boolean = false
 
     lateinit var customerService: CustomerService
+    lateinit var billingRequestService: BillingRequestService
 
+    /**
+     * Initializes the GoCardless SDK with the provided access token and environment.
+     *
+     * This method should be called once during your app's startup to set up the SDK.
+     * If the SDK has already been initialized, subsequent calls to this method will be ignored.
+     *
+     * @param accessToken Your GoCardless API access token.
+     * @param environment The environment (sandbox or live) for API requests.
+     */
     fun initSDK(accessToken: String, environment: Environment) {
         if (initialised) {
             return
@@ -29,8 +47,12 @@ object GoCardlessSDK {
             .addInterceptor(headerInterceptor)
             .build()
 
+        val gson = GsonBuilder()
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+            .create()
+
         val retrofit = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .baseUrl(environment.baseUrl)
             .client(client)
             .build()
