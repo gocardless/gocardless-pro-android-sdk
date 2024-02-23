@@ -1,7 +1,7 @@
 package com.gocardless.gocardlesssdk
 
 import com.gocardless.gocardlesssdk.model.Environment
-import com.gocardless.gocardlesssdk.network.GoCardlessAPI
+import com.gocardless.gocardlesssdk.network.GoCardlessApi
 import com.gocardless.gocardlesssdk.network.HeaderInterceptor
 import com.gocardless.gocardlesssdk.service.BillingRequestService
 import com.gocardless.gocardlesssdk.service.CustomerService
@@ -57,7 +57,7 @@ object GoCardlessSDK {
             .client(client)
             .build()
 
-        val goCardlessAPI = retrofit.create(GoCardlessAPI::class.java)
+        val goCardlessAPI = retrofit.create(GoCardlessApi::class.java)
 
         customerService = CustomerService(goCardlessAPI)
     }
