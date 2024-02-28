@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gocardless.gocardlesssdk.GoCardlessSDK
+import com.gocardless.gocardlesssdk.model.BillingRequest
 import com.gocardless.gocardlesssdk.model.Customer
-import com.gocardless.gocardlesssdk.model.Customers
-import com.gocardless.gocardlesssdk.network.Success
+import com.gocardless.gocardlesssdk.network.ApiSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,7 +16,7 @@ import javax.inject.Inject
 sealed class MainUiState {
     object Init : MainUiState()
     object Loading : MainUiState()
-    data class Success(val customers: Customers) : MainUiState()
+    data class Success(val customers: String) : MainUiState()
     data class Error(val message: String) : MainUiState()
 }
 
@@ -33,10 +33,15 @@ class MainViewModel @Inject constructor() : ViewModel() {
     fun fetchCustomers() {
         _uiState.value = MainUiState.Loading
         viewModelScope.launch {
-            val response = GoCardlessSDK.customerService.all()
+            val response = GoCardlessSDK.billingRequestService.createBillingRequest(
+                BillingRequest(
 
-            if (response is Success) {
-                _uiState.value = MainUiState.Success(response.value)
+                )
+            )
+
+            if (response is ApiSuccess) {
+//                response.value
+//                _uiState.value = MainUiState.Success(response.value)
             } else {
                 _uiState.value = MainUiState.Error("Couldn't fetch")
             }
@@ -47,14 +52,14 @@ class MainViewModel @Inject constructor() : ViewModel() {
         _uiState.value = MainUiState.Loading
         viewModelScope.launch {
             val service = GoCardlessSDK.customerService
-            service.delete(customer.id)
+//            service.delete(customer.id)
 
-            val response = service.all()
-            if (response is Success) {
-                _uiState.value = MainUiState.Success(response.value)
-            } else {
-                _uiState.value = MainUiState.Error("Couldn't fetch")
-            }
+//            val response = service.all()
+//            if (response is Success) {
+//                _uiState.value = MainUiState.Success(response.value)
+//            } else {
+//                _uiState.value = MainUiState.Error("Couldn't fetch")
+//            }
         }
     }
 

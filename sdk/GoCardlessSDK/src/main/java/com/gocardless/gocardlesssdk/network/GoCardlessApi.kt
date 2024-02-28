@@ -1,20 +1,14 @@
 package com.gocardless.gocardlesssdk.network
 
-import com.gocardless.gocardlesssdk.model.BillingRequestBundle
+import com.gocardless.gocardlesssdk.model.BillingRequestWrapper
 import retrofit2.Response
 import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Path
 
 interface GoCardlessApi {
     @POST("billing_requests")
-    suspend fun billingRequests(@Body request: BillingRequestBundle): Response<BillingRequestBundle>
+    suspend fun billingRequests(@Body request: BillingRequestWrapper): Response<BillingRequestWrapper>
 
-//    @GET("customers")
-//    suspend fun all(): Response<Customers>
-//
-//    @DELETE("customers/{customerId}")
-//    suspend fun delete(@Path("customerId") customerId: String): Response<Customers>
+    @POST("billing_flow_requests")
+    suspend fun billingFlowRequests(@Body request: BillingRequestWrapper): Response<BillingRequestWrapper>
 }

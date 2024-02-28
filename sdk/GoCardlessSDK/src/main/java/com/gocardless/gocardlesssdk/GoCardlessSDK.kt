@@ -1,8 +1,10 @@
 package com.gocardless.gocardlesssdk
 
+import com.gocardless.gocardlesssdk.error.ErrorMapper
 import com.gocardless.gocardlesssdk.model.Environment
 import com.gocardless.gocardlesssdk.network.GoCardlessApi
 import com.gocardless.gocardlesssdk.network.HeaderInterceptor
+import com.gocardless.gocardlesssdk.service.BillingRequestFlowService
 import com.gocardless.gocardlesssdk.service.BillingRequestService
 import com.gocardless.gocardlesssdk.service.CustomerService
 import com.google.gson.GsonBuilder
@@ -21,6 +23,7 @@ object GoCardlessSDK {
 
     lateinit var customerService: CustomerService
     lateinit var billingRequestService: BillingRequestService
+    lateinit var billingRequestFlowService: BillingRequestFlowService
 
     /**
      * Initializes the GoCardless SDK with the provided access token and environment.
@@ -59,6 +62,10 @@ object GoCardlessSDK {
 
         val goCardlessAPI = retrofit.create(GoCardlessApi::class.java)
 
+        val errorMapper = ErrorMapper(gson)
+
         customerService = CustomerService(goCardlessAPI)
+        billingRequestService = BillingRequestService(goCardlessAPI, errorMapper)
+        billingRequestFlowService = BillingRequestFlowService(goCardlessAPI, errorMapper)
     }
 }

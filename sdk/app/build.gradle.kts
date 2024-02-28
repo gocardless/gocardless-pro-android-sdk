@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
@@ -30,6 +32,13 @@ android {
                 "proguard-rules.pro"
             )
         }
+
+        debug {
+            val p = Properties()
+            p.load(project.rootProject.file("local.properties").reader())
+            val token: String = p.getProperty("ACCESS_TOKEN")
+            buildConfigField("String", "ACCESS_TOKEN", "\"$token\"")
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -40,6 +49,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"

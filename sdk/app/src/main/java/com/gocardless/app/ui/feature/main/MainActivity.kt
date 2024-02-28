@@ -85,7 +85,7 @@ fun Screen(viewModel: MainViewModel) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
     when (val uiStateValue = uiState.value) {
-        is MainUiState.Success -> MainList(list = uiStateValue.customers.customers, viewModel)
+        is MainUiState.Success -> MainList(list = emptyList(), viewModel)
         is MainUiState.Error -> Message(name = uiStateValue.message)
         MainUiState.Init -> Message(name = "Welcome")
         MainUiState.Loading -> Message(name = "Loading")

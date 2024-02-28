@@ -13,3 +13,13 @@ fun MockWebServer.successResponse(path: String) {
             .setBody(content)
     )
 }
+
+fun MockWebServer.errorResponse(path: String) {
+    val content = TestFileManager.read(path)
+
+    this.enqueue(
+        MockResponse()
+            .setResponseCode(HttpURLConnection.HTTP_BAD_REQUEST)
+            .setBody(content)
+    )
+}
