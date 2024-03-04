@@ -6,7 +6,6 @@ import com.gocardless.gocardlesssdk.network.GoCardlessApi
 import com.gocardless.gocardlesssdk.network.HeaderInterceptor
 import com.gocardless.gocardlesssdk.service.BillingRequestFlowService
 import com.gocardless.gocardlesssdk.service.BillingRequestService
-import com.gocardless.gocardlesssdk.service.CustomerService
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -21,7 +20,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 object GoCardlessSDK {
     private var initialised: Boolean = false
 
-    lateinit var customerService: CustomerService
     lateinit var billingRequestService: BillingRequestService
     lateinit var billingRequestFlowService: BillingRequestFlowService
 
@@ -64,7 +62,6 @@ object GoCardlessSDK {
 
         val errorMapper = ErrorMapper(gson)
 
-        customerService = CustomerService(goCardlessAPI)
         billingRequestService = BillingRequestService(goCardlessAPI, errorMapper)
         billingRequestFlowService = BillingRequestFlowService(goCardlessAPI, errorMapper)
     }

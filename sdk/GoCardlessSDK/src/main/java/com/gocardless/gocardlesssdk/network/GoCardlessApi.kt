@@ -1,5 +1,6 @@
 package com.gocardless.gocardlesssdk.network
 
+import com.gocardless.gocardlesssdk.model.BillingRequestFlowWrapper
 import com.gocardless.gocardlesssdk.model.BillingRequestWrapper
 import retrofit2.Response
 import retrofit2.http.Body
@@ -10,5 +11,5 @@ interface GoCardlessApi {
     suspend fun billingRequests(@Body request: BillingRequestWrapper): Response<BillingRequestWrapper>
 
     @POST("billing_flow_requests")
-    suspend fun billingFlowRequests(@Body request: BillingRequestWrapper): Response<BillingRequestWrapper>
+    suspend fun billingFlowRequests(@Body request: BillingRequestFlowWrapper): Response<BillingRequestFlowWrapper>
 }

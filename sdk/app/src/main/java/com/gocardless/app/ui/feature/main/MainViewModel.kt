@@ -51,7 +51,7 @@ class MainViewModel @Inject constructor() : ViewModel() {
     fun deleteCustomer(customer: Customer) {
         _uiState.value = MainUiState.Loading
         viewModelScope.launch {
-            val service = GoCardlessSDK.customerService
+//            val service = GoCardlessSDK.customerService
 //            service.delete(customer.id)
 
 //            val response = service.all()

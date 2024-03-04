@@ -1,6 +1,6 @@
 package com.gocardless.gocardlesssdk.network
 
-import com.gocardless.gocardlesssdk.error.GoCardlessException
+import com.gocardless.gocardlesssdk.error.GoCardlessError
 
 /**
  * Represents the result of an API operation.
@@ -27,4 +27,4 @@ data class ApiSuccess<T>(val value: T) : ApiResult<T>()
  * @param exception the exception associated with the error (if any).
  * @param T the type of data contained in the result.
  */
-data class ApiError<T>(val exception: GoCardlessException?) : ApiResult<T>()
+data class ApiError<T>(val exception: GoCardlessError?) : ApiResult<T>()

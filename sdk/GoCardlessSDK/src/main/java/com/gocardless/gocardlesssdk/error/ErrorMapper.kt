@@ -12,28 +12,28 @@ class ErrorMapper(private val gson: Gson) {
      * @param code HTTP status code.
      * @param reader Char stream of the response body
      */
-    fun process(code: Int, reader: Reader?): GoCardlessException {
+    fun process(code: Int, reader: Reader?): GoCardlessError {
         try {
             val body = gson.fromJson(reader, ErrorWrapper::class.java)
-            val error = body?.error
+            val error = body?.errorDetail
 
             when (code) {
-                401 -> return AuthenticationException(error)
-                403 -> return PermissionException(error)
-                429 -> return RateLimitException(error)
+                401 -> return AuthenticationError(error)
+                403 -> return PermissionError(error)
+                429 -> return RateLimitError(error)
             }
 
             when (error?.type) {
-                ErrorType.GOCARDLESS -> return GoCardlessInternalException(error)
-                ErrorType.INVALID_API_USAGE -> return InvalidApiUsageException(error)
-                ErrorType.INVALID_STATE -> return InvalidStateException(error)
-                ErrorType.VALIDATION_FAILED -> return ValidationFailedException(error)
+                ErrorType.GOCARDLESS -> return GoCardlessInternalError(error)
+                ErrorType.INVALID_API_USAGE -> return InvalidApiUsageError(error)
+                ErrorType.INVALID_STATE -> return InvalidStateError(error)
+                ErrorType.VALIDATION_FAILED -> return ValidationFailedError(error)
                 else -> {}
             }
 
-            return GoCardlessException(body?.error)
+            return GoCardlessError(body?.errorDetail)
         } catch (exception: Exception) {
-            return MalformedResponseException(Error(exception.message))
+            return MalformedResponseError(ErrorDetail(exception.message))
         }
     }
 }
