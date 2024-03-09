@@ -1,0 +1,15 @@
+{
+  "error": {
+    "message": "Billing request not found",
+    "errors": [
+      {
+        "reason": "link_not_found",
+        "message": "Billing request not found"
+      }
+    ],
+    "documentation_url": "https://developer.gocardless.com/api-reference#link_not_found",
+    "type": "invalid_api_usage",
+    "request_id": "23BF12D18060_0A14670D1F92_65E619D2_28050001",
+    "code": 404
+  }
+}
