@@ -16,6 +16,9 @@ class BillingRequestFlowService(
     private val goCardlessAPI: GoCardlessApi,
     private val errorMapper: ErrorMapper,
 ) {
+    /**
+     * Creates a new billing request flow.
+     */
     suspend fun createBillingRequestFlow(billingRequestFlow: BillingRequestFlow): ApiResult<BillingRequestFlow> {
         val response =
             goCardlessAPI.billingFlowRequests(BillingRequestFlowWrapper(billingRequestFlow))

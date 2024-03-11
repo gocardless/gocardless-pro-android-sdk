@@ -1,5 +1,7 @@
 package com.gocardless.gocardlesssdk.util
 
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.Assert

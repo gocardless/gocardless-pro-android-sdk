@@ -1,8 +1,12 @@
-package com.gocardless.gocardlesssdk.network
+package com.gocardless.gocardlesssdk.service
 
+import com.gocardless.gocardlesssdk.error.ErrorMapper
+import com.gocardless.gocardlesssdk.error.InvalidApiUsageError
 import com.gocardless.gocardlesssdk.model.BillingRequestFlow
-import com.gocardless.gocardlesssdk.model.BillingRequestFlowWrapper
 import com.gocardless.gocardlesssdk.model.Links
+import com.gocardless.gocardlesssdk.network.ApiError
+import com.gocardless.gocardlesssdk.network.ApiSuccess
+import com.gocardless.gocardlesssdk.network.GoCardlessApi
 import com.gocardless.gocardlesssdk.util.DateUtil
 import com.gocardless.gocardlesssdk.util.TestNetworkManager
 import com.gocardless.gocardlesssdk.util.assertRequest
@@ -15,15 +19,18 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
-class BillingRequestFlowApiTest {
+class BillingRequestFlowServiceTest {
     private lateinit var mockWebServer: MockWebServer
     private lateinit var api: GoCardlessApi
+    private lateinit var service: BillingRequestFlowService
+    private val errorMapper = ErrorMapper(TestNetworkManager.gson)
 
     @Before
     fun setUp() {
         mockWebServer = MockWebServer()
         mockWebServer.start()
         api = TestNetworkManager.create(mockWebServer.url("/"), GoCardlessApi::class.java)
+        service = BillingRequestFlowService(api, errorMapper)
     }
 
     @After
@@ -32,7 +39,7 @@ class BillingRequestFlowApiTest {
     }
 
     @Test
-    fun test_billing_request_flow_success() = runBlocking {
+    fun test_create_billing_request_flow() = runBlocking {
         // Given
         mockWebServer.successResponse("./billing_request_flow/success.json")
         val billingRequestFlow = BillingRequestFlow(
@@ -49,31 +56,30 @@ class BillingRequestFlowApiTest {
         )
 
         // When
-        val result = api.billingFlowRequests(BillingRequestFlowWrapper(billingRequestFlow))
-        val body = result.body()
+        val result = service.createBillingRequestFlow(billingRequestFlow)
 
         // Then
-        mockWebServer.assertRequest(
-            "./billing_request_flow/success_request.json",
-            "/billing_flow_requests"
-        )
-        assertEquals(true, result.isSuccessful)
-        assertEquals("BRF0002HJNHHDSCF4F5XEJE61E94AMAX", body?.billingRequestFlow?.id)
-        assertEquals("BRQ0005VSWHP5JE", body?.billingRequestFlow?.links?.billingRequest)
-        assertEquals("https://gocardless.com/", body?.billingRequestFlow?.redirectUri)
-        assertEquals("https://developer.gocardless.com/", body?.billingRequestFlow?.exitUri)
-        assertEquals(
-            DateUtil.create("2024-03-11T20:21:45.529Z"),
-            body?.billingRequestFlow?.createdAt
-        )
-        assertEquals(false, body?.billingRequestFlow?.lockCustomerDetails)
+        if (result is ApiSuccess) {
+            mockWebServer.assertRequest(
+                "./billing_request_flow/success_request.json",
+                "/billing_flow_requests"
+            )
+            assertEquals("BRF0002HJNHHDSCF4F5XEJE61E94AMAX", result.value.id)
+            assertEquals("BRQ0005VSWHP5JE", result.value.links?.billingRequest)
+            assertEquals("https://gocardless.com/", result.value.redirectUri)
+            assertEquals("https://developer.gocardless.com/", result.value.exitUri)
+            assertEquals(DateUtil.create("2024-03-11T20:21:45.529Z"), result.value.createdAt)
+            assertEquals(false, result.value.lockCustomerDetails)
+        } else {
+            throw Exception("Unexpected result")
+        }
     }
 
     @Test
     fun test_create_billing_request_flow_missing_field() = runBlocking {
         // Given no billing request id is provided
         mockWebServer.errorResponse("./billing_request_flow/error.json")
-        val billingRequestFlow = BillingRequestFlow(
+        val billingRequest = BillingRequestFlow(
             autoFulfil = true,
             lockCurrency = true,
             lockBankAccount = false,
@@ -85,10 +91,13 @@ class BillingRequestFlowApiTest {
         )
 
         // When
-        val result = api.billingFlowRequests(BillingRequestFlowWrapper(billingRequestFlow))
-        val body = result.body()
+        val result = service.createBillingRequestFlow(billingRequest)
 
         // Then
-        assertEquals(false, result.isSuccessful)
+        if (result is ApiError) {
+            assertEquals(InvalidApiUsageError::class.java, result.error!!::class.java)
+        } else {
+            throw Exception("Unexpected result")
+        }
     }
 }

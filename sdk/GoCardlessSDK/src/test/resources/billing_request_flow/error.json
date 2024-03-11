@@ -1,15 +1,16 @@
 {
   "error": {
-    "message": "Billing request not found",
+    "message": "Invalid document structure",
     "errors": [
       {
-        "reason": "link_not_found",
-        "message": "Billing request not found"
+        "field": "links",
+        "message": "\"billing_request\" wasn't supplied.",
+        "request_pointer": "/billing_request_flows/links"
       }
     ],
-    "documentation_url": "https://developer.gocardless.com/api-reference#link_not_found",
+    "documentation_url": "https://developer.gocardless.com/api-reference#invalid_document_structure",
     "type": "invalid_api_usage",
-    "request_id": "23BF12D18060_0A14670D1F92_65E619D2_28050001",
-    "code": 404
+    "request_id": "23BF10A796B4_0A14944D1F92_65EF6E25_831F0001",
+    "code": 400
   }
 }

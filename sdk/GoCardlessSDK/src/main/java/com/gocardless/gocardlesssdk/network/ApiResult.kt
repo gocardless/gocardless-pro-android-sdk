@@ -24,7 +24,7 @@ data class ApiSuccess<T>(val value: T) : ApiResult<T>()
 /**
  * Represents an error in the API result.
  *
- * @param exception the exception associated with the error (if any).
+ * @param error the exception associated with the error (if any).
  * @param T the type of data contained in the result.
  */
-data class ApiError<T>(val exception: GoCardlessError?) : ApiResult<T>()
+data class ApiError<T>(val error: GoCardlessError?) : ApiResult<T>()

@@ -26,5 +26,9 @@ data class Links(
     /**
      * (Optional) ID of the associated mandate request
      */
-    @SerializedName("mandate_request") var mandateRequest: String? = null
+    @SerializedName("mandate_request") var mandateRequest: String? = null,
+    /**
+     * ID of the billing request against which this flow was created.
+     */
+    @SerializedName("billing_request") var billingRequest: String? = null
 )
