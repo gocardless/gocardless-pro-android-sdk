@@ -1,0 +1,1 @@
+{"billing_requests":{"status":"unknown","mandate_request":{"currency":"GBP","scheme":"bacs","links":{},"metadata":{"postman":"mandate-only-br"}},"payment_request":{"links":{},"metadata":{}},"metadata":{"test":"BR731"},"links":{},"actions":[],"resources":{"customer":{"metadata":{}},"customer_billing_detail":{}}}}

@@ -17,11 +17,11 @@ data class Action(
     /**
      * Which other action types this action can complete.
      */
-    @SerializedName("completes_actions") var completesActions: ArrayList<String> = arrayListOf(),
+    @SerializedName("completes_actions") var completesActions: ArrayList<ActionType> = arrayListOf(),
     /**
      * Requires completing these actions before this action can be completed.
      */
-    @SerializedName("requires_actions") var requiresActions: ArrayList<String> = arrayListOf(),
+    @SerializedName("requires_actions") var requiresActions: ArrayList<ActionType> = arrayListOf(),
     /**
      * Status of the action
      */
@@ -30,6 +30,7 @@ data class Action(
      * List of currencies the current mandate supports
      */
     @SerializedName("available_currencies") var availableCurrencies: ArrayList<String> = arrayListOf(),
+    @SerializedName("available_country_codes") var availableCountryCodes: ArrayList<String> = arrayListOf(),
     /**
      * Describes the behaviour of bank authorisations, for the bank_authorisation action
      */

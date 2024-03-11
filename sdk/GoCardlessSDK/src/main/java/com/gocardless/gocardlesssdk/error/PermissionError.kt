@@ -1,4 +1,6 @@
 package com.gocardless.gocardlesssdk.error
 
-class PermissionError(errorDetail: ErrorDetail?) : GoCardlessError(errorDetail) {
-}
+/**
+ * Represents an error that occurs when user is not permitted to do desired action.
+ */
+class PermissionError(errorDetail: ErrorDetail?) : GoCardlessError(errorDetail)

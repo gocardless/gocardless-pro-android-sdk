@@ -2,6 +2,7 @@ package com.gocardless.gocardlesssdk.util
 
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
+import org.junit.Assert
 import java.net.HttpURLConnection
 
 fun MockWebServer.successResponse(path: String) {
@@ -22,4 +23,14 @@ fun MockWebServer.errorResponse(path: String) {
             .setResponseCode(HttpURLConnection.HTTP_BAD_REQUEST)
             .setBody(content)
     )
+}
+
+fun MockWebServer.assertRequest(filePath: String, url: String) {
+    val recordedRequest = takeRequest()
+    val responseBody = recordedRequest.body.readUtf8()
+    val content = TestFileManager.read(filePath)
+
+    // Then
+    Assert.assertEquals(url, recordedRequest.path)
+    Assert.assertEquals(content, responseBody)
 }

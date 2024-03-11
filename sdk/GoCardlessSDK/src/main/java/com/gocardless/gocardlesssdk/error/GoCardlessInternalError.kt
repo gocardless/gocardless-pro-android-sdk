@@ -1,4 +1,6 @@
 package com.gocardless.gocardlesssdk.error
 
-class GoCardlessInternalError(errorDetail: ErrorDetail?) : GoCardlessError(errorDetail) {
-}
+/**
+ * Represents an error that occurs when an internal error occurred while processing your request.
+ */
+class GoCardlessInternalError(errorDetail: ErrorDetail?) : GoCardlessError(errorDetail)

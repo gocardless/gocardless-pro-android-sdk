@@ -33,6 +33,7 @@ class MainViewModel @Inject constructor() : ViewModel() {
     fun fetchCustomers() {
         _uiState.value = MainUiState.Loading
         viewModelScope.launch {
+            GoCardlessSDK.billingRequestService
             val response = GoCardlessSDK.billingRequestService.createBillingRequest(
                 BillingRequest(
 
@@ -51,15 +52,6 @@ class MainViewModel @Inject constructor() : ViewModel() {
     fun deleteCustomer(customer: Customer) {
         _uiState.value = MainUiState.Loading
         viewModelScope.launch {
-//            val service = GoCardlessSDK.customerService
-//            service.delete(customer.id)
-
-//            val response = service.all()
-//            if (response is Success) {
-//                _uiState.value = MainUiState.Success(response.value)
-//            } else {
-//                _uiState.value = MainUiState.Error("Couldn't fetch")
-//            }
         }
     }
 

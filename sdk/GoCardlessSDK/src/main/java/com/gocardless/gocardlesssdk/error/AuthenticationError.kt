@@ -1,4 +1,6 @@
 package com.gocardless.gocardlesssdk.error
 
-class AuthenticationError(errorDetail: ErrorDetail?) : GoCardlessError(errorDetail) {
-}
+/**
+ * Represents an error that occurs when user credentials/api key provided is invalid.
+ */
+class AuthenticationError(errorDetail: ErrorDetail?) : GoCardlessError(errorDetail)

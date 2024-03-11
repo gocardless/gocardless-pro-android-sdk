@@ -20,7 +20,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 object GoCardlessSDK {
     private var initialised: Boolean = false
 
+    /**
+     * Billing Request Service
+     */
     lateinit var billingRequestService: BillingRequestService
+
+    /**
+     * Billing Request Flow Service
+     */
     lateinit var billingRequestFlowService: BillingRequestFlowService
 
     /**
