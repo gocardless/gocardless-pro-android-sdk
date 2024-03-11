@@ -49,7 +49,7 @@ class BillingRequestServiceTest {
     }
 
     @Test
-    fun test_create_billing_request() = runBlocking {
+    fun test_create_billing_request_direct_debit_only() = runBlocking {
         // Given
         mockWebServer.successResponse("./billing_request/direct_debit_only.json")
         val billingRequest = BillingRequest(
