@@ -1,8 +1,8 @@
 {
   "billing_requests": {
-    "id": "BRQ0005QQ30QYJE",
-    "created_at": "2024-02-21T13:54:18.169Z",
-    "status": "pending",
+    "id": "BRQ0005XEEVPV4B",
+    "created_at": "2024-03-19T12:31:39.559Z",
+    "status": "cancelled",
     "mandate_request": {
       "currency": "GBP",
       "constraints": null,
@@ -11,137 +11,31 @@
       "verify": "recommended",
       "links": {},
       "metadata": {
-        "key": "value"
+        "postman": "mandate-only-br"
       },
       "description": null,
       "payer_requested_dual_signature": false
     },
-    "payment_request": {
-      "description": "Gorgeous Concrete Keyboard",
-      "currency": "GBP",
-      "amount": 92368,
-      "min_amount": null,
-      "max_amount": null,
-      "default_min_amount": null,
-      "default_max_amount": null,
-      "app_fee": null,
-      "scheme": "faster_payments",
-      "links": {},
-      "metadata": {
-        "key": "value"
-      },
-      "flexible_amount": false
-    },
+    "payment_request": null,
     "metadata": {
-      "test": "BR668"
+      "test": "BR179"
     },
     "links": {
-      "customer": "CU0013N5KS8WW6",
-      "customer_billing_detail": "CBD000HX9F4HFGQ",
+      "customer": "CU0014A8WS91ZX",
+      "customer_billing_detail": "CBD000JCPH6179N",
       "creditor": "CR00007J0CSSJG",
       "organisation": "OR00005F8R8W8Y",
-      "payment_request": "PRQ0000Q0GQR8K7",
-      "mandate_request": "MRQ00059D6E49PG"
+      "mandate_request": "MRQ0005EAZV5C79"
     },
     "fallback_enabled": false,
     "fallback_occurred": false,
     "sign_flow_url": null,
     "creditor_name": "GunhanOrg",
-    "actions": [
-      {
-        "type": "choose_currency",
-        "required": true,
-        "completes_actions": [],
-        "requires_actions": [],
-        "status": "completed",
-        "available_currencies": [
-          "GBP",
-          "EUR"
-        ]
-      },
-      {
-        "type": "collect_amount",
-        "required": true,
-        "completes_actions": [],
-        "requires_actions": [],
-        "status": "completed"
-      },
-      {
-        "type": "collect_customer_details",
-        "required": true,
-        "completes_actions": [],
-        "requires_actions": [
-          "choose_currency",
-          "collect_amount"
-        ],
-        "status": "pending",
-        "collect_customer_details": {
-          "incomplete_fields": {
-            "customer": [
-              "email",
-              "given_name",
-              "family_name"
-            ],
-            "customer_billing_detail": [
-              "address_line1",
-              "city",
-              "postal_code",
-              "country_code"
-            ]
-          },
-          "default_country_code": "GB"
-        }
-      },
-      {
-        "type": "select_institution",
-        "required": true,
-        "completes_actions": [],
-        "requires_actions": [],
-        "status": "pending",
-        "institution_guess_status": "pending"
-      },
-      {
-        "type": "collect_bank_account",
-        "required": true,
-        "completes_actions": [
-          "choose_currency"
-        ],
-        "available_country_codes": [
-          "GB"
-        ],
-        "requires_actions": [
-          "collect_amount"
-        ],
-        "status": "pending"
-      },
-      {
-        "type": "confirm_payer_details",
-        "required": true,
-        "completes_actions": [],
-        "requires_actions": [
-          "collect_customer_details",
-          "collect_bank_account"
-        ],
-        "status": "pending"
-      },
-      {
-        "type": "bank_authorisation",
-        "required": true,
-        "completes_actions": [],
-        "requires_actions": [
-          "select_institution"
-        ],
-        "status": "pending",
-        "bank_authorisation": {
-          "authorisation_type": "payment",
-          "adapter": "open_banking_gateway_pis"
-        }
-      }
-    ],
+    "actions": [],
     "resources": {
       "customer": {
-        "id": "CU0013N5KS8WW6",
-        "created_at": "2024-02-21T13:54:18.132Z",
+        "id": "CU0014A8WS91ZX",
+        "created_at": "2024-03-19T12:31:39.546Z",
         "email": null,
         "given_name": null,
         "family_name": null,
@@ -151,8 +45,8 @@
         "metadata": {}
       },
       "customer_billing_detail": {
-        "id": "CBD000HX9F4HFGQ",
-        "created_at": "2024-02-21T13:54:18.155Z",
+        "id": "CBD000JCPH6179N",
+        "created_at": "2024-03-19T12:31:39.555Z",
         "address_line1": null,
         "address_line2": null,
         "address_line3": null,
@@ -169,7 +63,9 @@
       "is_eligible_for_optional_vm_experiments": false,
       "is_eligible_for_institution_experiments": false,
       "is_eligible_for_ach_optional_address_experiments": false,
-      "is_eligible_for_single_tab_experiments": false
+      "is_eligible_for_ach_mx_experiments": false,
+      "is_eligible_for_single_tab_experiments": false,
+      "is_eligible_for_bankid_safe_start_experiments": false
     }
   }
 }

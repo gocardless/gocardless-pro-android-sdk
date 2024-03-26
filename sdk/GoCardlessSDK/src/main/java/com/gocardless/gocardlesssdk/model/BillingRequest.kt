@@ -45,7 +45,7 @@ data class BillingRequest(
      */
     @SerializedName("fallback_enabled") var fallbackEnabled: Boolean? = null,
     /**
-     * Once the fallback occurs, then the fallback_occurred the parameter will be set to `true``
+     * Once the fallback occurs, then the fallback_occurred the parameter will be set to `true`
      */
     @SerializedName("fallback_occurred") var fallbackOccurred: Boolean? = null,
     @SerializedName("sign_flow_url") var signFlowUrl: String? = null,

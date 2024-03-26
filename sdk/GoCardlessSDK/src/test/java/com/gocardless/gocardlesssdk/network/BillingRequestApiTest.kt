@@ -407,7 +407,7 @@ class BillingRequestApiTest {
     fun test_billing_request_action_cancel() = runBlocking {
         // Given
         mockWebServer.successResponse("./actions/cancel.json")
-        val billingRequestId = "BRQ0005QQ30QYJE"
+        val billingRequestId = "BRQ0005XEEVPV4B"
 
         // When
         val result = api.billingRequestsActions(
@@ -423,7 +423,7 @@ class BillingRequestApiTest {
             mockWebServer.takeRequest().path
         )
         assertTrue(result.isSuccessful)
-        assertEquals("BRQ0005QQ30QYJE", billingRequest?.billingRequests?.id)
+        assertEquals("BRQ0005XEEVPV4B", billingRequest?.billingRequests?.id)
     }
 
     @Test

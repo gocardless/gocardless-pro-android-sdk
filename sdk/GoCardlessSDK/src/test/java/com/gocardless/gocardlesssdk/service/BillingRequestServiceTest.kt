@@ -351,6 +351,7 @@ class BillingRequestServiceTest {
                 mockWebServer.takeRequest().path
             )
             assertEquals("BRQ00019RNXYJ5D", result.value.id)
+            assertEquals(BillingRequestStatus.FULFILLED, result.value.status)
         } else {
             throw Exception("Unexpected result")
         }
@@ -360,7 +361,7 @@ class BillingRequestServiceTest {
     fun test_billing_request_action_cancel() = runBlocking {
         // Given
         mockWebServer.successResponse("./actions/cancel.json")
-        val billingRequestId = "BRQ0005QQ30QYJE"
+        val billingRequestId = "BRQ0005XEEVPV4B"
 
         // When
         val result = service.cancel(billingRequestId)
@@ -372,7 +373,8 @@ class BillingRequestServiceTest {
                 "/billing_requests/$billingRequestId/actions/cancel",
                 mockWebServer.takeRequest().path
             )
-            assertEquals("BRQ0005QQ30QYJE", result.value.id)
+            assertEquals(billingRequestId, result.value.id)
+            assertEquals(BillingRequestStatus.CANCELLED, result.value.status)
         } else {
             throw Exception("Unexpected result")
         }

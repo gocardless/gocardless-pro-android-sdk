@@ -11,7 +11,7 @@ class App : Application() {
         super.onCreate()
 
         GoCardlessSDK.initSDK(
-            BuildConfig.ACCESS_TOKEN,
+            "ENTER_YOUR_ACCESS_TOKEN",
             Environment.Sandbox
         )
     }
