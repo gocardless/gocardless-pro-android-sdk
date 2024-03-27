@@ -1,0 +1,15 @@
+{
+  "error": {
+    "message": "The customer attached to the billing request must have an email",
+    "errors": [
+      {
+        "reason": "billing_request_missing_customer_email",
+        "message": "The customer attached to the billing request must have an email"
+      }
+    ],
+    "documentation_url": "https://developer.gocardless.com/api-reference#billing_request_missing_customer_email",
+    "type": "invalid_state",
+    "request_id": "82D3021DA4F0_0A1457C31F92_65EF13F9_0E480001",
+    "code": 422
+  }
+}

@@ -1,0 +1,1 @@
+{"billing_request_flows":{"auto_fulfil":true,"redirect_uri":"https://gocardless.com/","exit_uri":"https://developer.gocardless.com/","lock_customer_details":false,"lock_bank_account":false,"links":{"billing_request":"BRQ0005VSWHP5JE"},"config":{"merchant_contact_details":{},"scheme_identifiers":[]},"show_redirect_buttons":true,"lock_currency":true}}

@@ -1,0 +1,1 @@
+{"billing_requests":{"status":"unknown","mandate_request":{"links":{},"metadata":{}},"payment_request":{"description":"Unbranded Wooden Tuna","currency":"GBP","amount":4254,"links":{},"metadata":{"postman":"payment-only-br"}},"metadata":{"test":"BR766"},"links":{},"actions":[],"resources":{"customer":{"metadata":{}},"customer_billing_detail":{}}}}
