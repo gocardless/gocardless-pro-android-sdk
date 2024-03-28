@@ -1,0 +1,305 @@
+{
+  "billing_requests": [
+    {
+      "id": "BRQ0005XPF8YSR1",
+      "created_at": "2024-03-20T11:28:37.487Z",
+      "status": "pending",
+      "mandate_request": null,
+      "payment_request": {
+        "description": "Practical Plastic Tuna",
+        "currency": "GBP",
+        "amount": 3791,
+        "min_amount": null,
+        "max_amount": null,
+        "default_min_amount": null,
+        "default_max_amount": null,
+        "app_fee": null,
+        "scheme": "faster_payments",
+        "links": {},
+        "metadata": {
+          "postman": "payment-only-br"
+        },
+        "flexible_amount": false,
+        "reference": null,
+        "funds_settlement": "managed"
+      },
+      "metadata": {
+        "test": "BR812"
+      },
+      "links": {
+        "customer": "CU0014BB0BVWZZ",
+        "customer_billing_detail": "CBD000JDHMXQR69",
+        "creditor": "CR00007J0CSSJG",
+        "organisation": "OR00005F8R8W8Y",
+        "payment_request": "PRQ0000R80R7R0W"
+      },
+      "fallback_enabled": false,
+      "fallback_occurred": false,
+      "sign_flow_url": null
+    },
+    {
+      "id": "BRQ0005XPCJ43J6",
+      "created_at": "2024-03-20T11:17:29.771Z",
+      "status": "fulfilled",
+      "mandate_request": {
+        "currency": "GBP",
+        "constraints": null,
+        "scheme": "bacs",
+        "sweeping": false,
+        "verify": "recommended",
+        "links": {
+          "mandate": "MD000ZQFRW73MD"
+        },
+        "metadata": {
+          "postman": "mandate-only-br"
+        },
+        "description": null,
+        "payer_requested_dual_signature": false
+      },
+      "payment_request": null,
+      "metadata": {
+        "test": "BR720"
+      },
+      "links": {
+        "customer": "CU0014BA8CDJ65",
+        "customer_billing_detail": "CBD000JDGY97RPX",
+        "customer_bank_account": "BA000ZMGVW397D",
+        "creditor": "CR00007J0CSSJG",
+        "organisation": "OR00005F8R8W8Y",
+        "mandate_request": "MRQ0005EJH1N5MY",
+        "mandate_request_mandate": "MD000ZQFRW73MD"
+      },
+      "fallback_enabled": false,
+      "fallback_occurred": false,
+      "sign_flow_url": null
+    },
+    {
+      "id": "BRQ0005XP8XW966",
+      "created_at": "2024-03-20T11:05:42.676Z",
+      "status": "pending",
+      "mandate_request": {
+        "currency": "GBP",
+        "constraints": null,
+        "scheme": "bacs",
+        "sweeping": false,
+        "verify": "recommended",
+        "links": {},
+        "metadata": {
+          "postman": "payment-mandate-br"
+        },
+        "description": null,
+        "payer_requested_dual_signature": false
+      },
+      "payment_request": {
+        "description": "Licensed Rubber Salad",
+        "currency": "GBP",
+        "amount": 75733,
+        "min_amount": null,
+        "max_amount": null,
+        "default_min_amount": null,
+        "default_max_amount": null,
+        "app_fee": null,
+        "scheme": "faster_payments",
+        "links": {},
+        "metadata": {
+          "postman": "payment-mandate-br"
+        },
+        "flexible_amount": false,
+        "reference": null,
+        "funds_settlement": "managed"
+      },
+      "metadata": {
+        "test": "BR548"
+      },
+      "links": {
+        "customer": "CU0014AT1Z1WE9",
+        "customer_billing_detail": "CBD000JDGKSW5CZ",
+        "customer_bank_account": "BA000ZMGJQ7RM2",
+        "creditor": "CR00007J0CSSJG",
+        "organisation": "OR00005F8R8W8Y",
+        "payment_request": "PRQ0000R808T2R4",
+        "mandate_request": "MRQ0005EJDGRYPM"
+      },
+      "fallback_enabled": false,
+      "fallback_occurred": false,
+      "sign_flow_url": null
+    },
+    {
+      "id": "BRQ0005XKKZZYKF",
+      "created_at": "2024-03-20T04:10:07.518Z",
+      "status": "pending",
+      "mandate_request": {
+        "currency": "GBP",
+        "constraints": null,
+        "scheme": "bacs",
+        "sweeping": false,
+        "verify": "recommended",
+        "links": {},
+        "metadata": {
+          "postman": "payment-mandate-br"
+        },
+        "description": null,
+        "payer_requested_dual_signature": false
+      },
+      "payment_request": {
+        "description": "Fantastic Fresh Chicken",
+        "currency": "GBP",
+        "amount": 64625,
+        "min_amount": null,
+        "max_amount": null,
+        "default_min_amount": null,
+        "default_max_amount": null,
+        "app_fee": null,
+        "scheme": "faster_payments",
+        "links": {},
+        "metadata": {
+          "postman": "payment-mandate-br"
+        },
+        "flexible_amount": false,
+        "reference": null,
+        "funds_settlement": "managed"
+      },
+      "metadata": {
+        "test": "BR945"
+      },
+      "links": {
+        "customer": "CU0014AT1Z1WE9",
+        "customer_billing_detail": "CBD000JD2XD4R1N",
+        "creditor": "CR00007J0CSSJG",
+        "organisation": "OR00005F8R8W8Y",
+        "payment_request": "PRQ0000R7P2Q449",
+        "mandate_request": "MRQ0005EFVHMF4E"
+      },
+      "fallback_enabled": false,
+      "fallback_occurred": false,
+      "sign_flow_url": null
+    },
+    {
+      "id": "BRQ0005XEEVPV4B",
+      "created_at": "2024-03-19T12:31:39.559Z",
+      "status": "cancelled",
+      "mandate_request": {
+        "currency": "GBP",
+        "constraints": null,
+        "scheme": "bacs",
+        "sweeping": false,
+        "verify": "recommended",
+        "links": {},
+        "metadata": {
+          "postman": "mandate-only-br"
+        },
+        "description": null,
+        "payer_requested_dual_signature": false
+      },
+      "payment_request": null,
+      "metadata": {
+        "test": "BR179"
+      },
+      "links": {
+        "customer": "CU0014A8WS91ZX",
+        "customer_billing_detail": "CBD000JCPH6179N",
+        "creditor": "CR00007J0CSSJG",
+        "organisation": "OR00005F8R8W8Y",
+        "mandate_request": "MRQ0005EAZV5C79"
+      },
+      "fallback_enabled": false,
+      "fallback_occurred": false,
+      "sign_flow_url": null
+    },
+    {
+      "id": "BRQ0005VSWHP5JE",
+      "created_at": "2024-03-11T17:22:40.978Z",
+      "status": "pending",
+      "mandate_request": {
+        "currency": "GBP",
+        "constraints": null,
+        "scheme": "bacs",
+        "sweeping": false,
+        "verify": "recommended",
+        "links": {},
+        "metadata": {
+          "postman": "payment-mandate-br"
+        },
+        "description": null,
+        "payer_requested_dual_signature": false
+      },
+      "payment_request": {
+        "description": "Awesome Frozen Pants",
+        "currency": "GBP",
+        "amount": 23956,
+        "min_amount": null,
+        "max_amount": null,
+        "default_min_amount": null,
+        "default_max_amount": null,
+        "app_fee": null,
+        "scheme": "faster_payments",
+        "links": {},
+        "metadata": {
+          "postman": "payment-mandate-br"
+        },
+        "flexible_amount": false,
+        "reference": null,
+        "funds_settlement": "managed"
+      },
+      "metadata": {
+        "test": "BR332"
+      },
+      "links": {
+        "customer": "CU001443KK5AGJ",
+        "customer_billing_detail": "CBD000J8BYAEFK1",
+        "customer_bank_account": "BA000ZKRTFW1VA",
+        "creditor": "CR00007J0CSSJG",
+        "organisation": "OR00005F8R8W8Y",
+        "payment_request": "PRQ0000QY08XZ56",
+        "mandate_request": "MRQ0005CTBYPFT4"
+      },
+      "fallback_enabled": false,
+      "fallback_occurred": false,
+      "sign_flow_url": null
+    },
+    {
+      "id": "BRQ0005VSW88XMW",
+      "created_at": "2024-03-11T17:22:11.090Z",
+      "status": "pending",
+      "mandate_request": null,
+      "payment_request": {
+        "description": "Unbranded Wooden Tuna",
+        "currency": "GBP",
+        "amount": 4254,
+        "min_amount": null,
+        "max_amount": null,
+        "default_min_amount": null,
+        "default_max_amount": null,
+        "app_fee": null,
+        "scheme": "faster_payments",
+        "links": {},
+        "metadata": {
+          "postman": "payment-only-br"
+        },
+        "flexible_amount": false,
+        "reference": null,
+        "funds_settlement": "managed"
+      },
+      "metadata": {
+        "test": "BR766"
+      },
+      "links": {
+        "customer": "CU001443JYM9YT",
+        "customer_billing_detail": "CBD000J8BXSXQGK",
+        "creditor": "CR00007J0CSSJG",
+        "organisation": "OR00005F8R8W8Y",
+        "payment_request": "PRQ0000QY079FR1"
+      },
+      "fallback_enabled": false,
+      "fallback_occurred": false,
+      "sign_flow_url": null
+    }
+  ],
+  "meta": {
+    "cursors": {
+      "before": null,
+      "after": null
+    },
+    "limit": 50
+  }
+}

@@ -36,3 +36,10 @@ fun MockWebServer.assertRequest(filePath: String, url: String) {
     Assert.assertEquals(url, recordedRequest.path)
     Assert.assertEquals(content, responseBody)
 }
+
+fun MockWebServer.assertPath(url: String) {
+    val recordedRequest = takeRequest()
+
+    // Then
+    Assert.assertEquals(url, recordedRequest.path)
+}

@@ -1,3 +1,6 @@
 package com.gocardless.gocardlesssdk.model
 
-class MetaData() : HashMap<String, Any>()
+/**
+ * Key-value store of custom data
+ */
+class MetaData : HashMap<String, Any>()
