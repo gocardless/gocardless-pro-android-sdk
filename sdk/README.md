@@ -34,13 +34,34 @@ GoCardlessSDK.initSDK(
 )
 ```
 
+## Supported Services
+Currently we support the following services and their functions
+
+### Billing Request
+- `createBillingRequest`: Creates a Billing Request, enabling you to collect all types of GoCardless payments
+- `collectCustomerDetails`: If the billing request has a pending collect_customer_details action, this endpoint can be used to collect the details in order to complete it.
+- `collectBankAccount`: If the billing request has a pending collect_bank_account action, this endpoint can be used to collect the details in order to complete it.
+- `confirmPayerDetails`: This is needed when you have a mandate request. As a scheme compliance rule we are required to allow the payer to crosscheck the details entered by them and confirm it.
+- `fulfil`: If a billing request is ready to be fulfilled, call this endpoint to cause it to fulfil, executing the payment.
+- `cancel`: Immediately cancels a billing request, causing all billing request flows to expire.
+- `notify`: Notifies the customer linked to the billing request, asking them to authorise it.
+- `getBillingRequest`: Fetches a billing request
+- `listBillingRequests`: Returns a cursor-paginated list of your billing requests.
+
+### Billing Request Flow
+- `createBillingRequestFlow`: Creates a new billing request flow.
+
+### Payment
+- `createPaymentRequest`: Creates a new payment object.
+- ``
+
 ## Examples
 
 Note: To be able to make any request, you must initialise the SDK.
 
 ### Fetching List of Billing Requests
 
-Please also make sure that all the requests are made in a correct `Scope` before launching.
+Ensure that all requests are made within the correct `Scope` before launching.
 
 ```kotlin
 viewModelScope.launch {
@@ -48,10 +69,10 @@ viewModelScope.launch {
 }
 ```
 
-A response can either be a `ApiSuccess` or `ApiError`
+The response can be of two types: `ApiSuccess` or `ApiError`.
 
-- `ApiSuccess.value` contains the actual result from the operation
-- `ApiError.error` contains the actual error from the operation
+- `ApiSuccess.value` Contains the result of the operation.
+- `ApiError.error` Contains details of the encountered error.
 
 ```kotlin
 when(response) {
