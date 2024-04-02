@@ -1,11 +1,12 @@
 package com.gocardless.gocardlesssdk
 
 import com.gocardless.gocardlesssdk.error.ErrorMapper
-import com.gocardless.gocardlesssdk.model.Environment
+import com.gocardless.gocardlesssdk.network.Environment
 import com.gocardless.gocardlesssdk.network.GoCardlessApi
 import com.gocardless.gocardlesssdk.network.HeaderInterceptor
 import com.gocardless.gocardlesssdk.service.BillingRequestFlowService
 import com.gocardless.gocardlesssdk.service.BillingRequestService
+import com.gocardless.gocardlesssdk.service.PaymentService
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -29,6 +30,11 @@ object GoCardlessSDK {
      * Billing Request Flow Service
      */
     lateinit var billingRequestFlowService: BillingRequestFlowService
+
+    /**
+     * Payments Service
+     */
+    lateinit var paymentService: PaymentService
 
     /**
      * Initializes the GoCardless SDK with the provided access token and environment.
@@ -71,5 +77,6 @@ object GoCardlessSDK {
 
         billingRequestService = BillingRequestService(goCardlessAPI, errorMapper)
         billingRequestFlowService = BillingRequestFlowService(goCardlessAPI, errorMapper)
+        paymentService = PaymentService(goCardlessAPI, errorMapper)
     }
 }

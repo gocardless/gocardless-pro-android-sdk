@@ -19,6 +19,7 @@ import com.gocardless.gocardlesssdk.network.ApiSuccess
 import com.gocardless.gocardlesssdk.network.GoCardlessApi
 import com.gocardless.gocardlesssdk.util.DateUtil
 import com.gocardless.gocardlesssdk.util.TestNetworkManager
+import com.gocardless.gocardlesssdk.util.assertPath
 import com.gocardless.gocardlesssdk.util.assertRequest
 import com.gocardless.gocardlesssdk.util.successResponse
 import kotlinx.coroutines.runBlocking
@@ -400,6 +401,45 @@ class BillingRequestServiceTest {
                 "/billing_requests/$billingRequestId/actions/notify"
             )
             assertEquals("BRQ0005QQ30QYJE", result.value.id)
+        } else {
+            throw Exception("Unexpected result")
+        }
+    }
+
+    @Test
+    fun test_list_billing_requests() = runBlocking {
+        // Given
+        mockWebServer.successResponse("./billing_request/billing_requests.json")
+
+        // When
+        val result = service.listBillingRequests()
+
+        // Then
+        if (result is ApiSuccess) {
+            mockWebServer.assertPath("/billing_requests")
+            val first = result.value.billingRequests?.first()
+            assertEquals(7, result.value.billingRequests?.size)
+            assertEquals("BRQ0005XPF8YSR1", first?.id)
+            assertEquals(50, result.value.meta?.limit)
+        } else {
+            throw Exception("Unexpected result")
+        }
+    }
+
+    @Test
+    fun test_get_billing_request() = runBlocking {
+        // Given
+        val billingRequestId = "BRQ0005QQ30QYJE"
+        mockWebServer.successResponse("./billing_request/success.json")
+
+        // When
+        val result = service.getBillingRequest(billingRequestId)
+
+        // Then
+        if (result is ApiSuccess) {
+            mockWebServer.assertPath("/billing_requests/${billingRequestId}")
+            assertEquals("BRQ0005QQ30QYJE", result.value.id)
+            assertEquals(92368, result.value.paymentRequest?.amount)
         } else {
             throw Exception("Unexpected result")
         }

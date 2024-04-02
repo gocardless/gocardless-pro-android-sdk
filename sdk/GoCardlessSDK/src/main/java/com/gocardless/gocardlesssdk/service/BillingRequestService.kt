@@ -3,6 +3,7 @@ package com.gocardless.gocardlesssdk.service
 import com.gocardless.gocardlesssdk.error.ErrorMapper
 import com.gocardless.gocardlesssdk.model.BillingRequest
 import com.gocardless.gocardlesssdk.model.BillingRequestActionType
+import com.gocardless.gocardlesssdk.model.BillingRequestList
 import com.gocardless.gocardlesssdk.model.BillingRequestWrapper
 import com.gocardless.gocardlesssdk.model.CollectBankAccount
 import com.gocardless.gocardlesssdk.model.CollectCustomerDetailsRequest
@@ -206,6 +207,39 @@ class BillingRequestService(
 
         return if (response.isSuccessful) {
             ApiSuccess(response.body()?.billingRequests ?: BillingRequest())
+        } else {
+            val error = errorMapper.process(response.code(), response.errorBody()?.charStream())
+            ApiError(error)
+        }
+    }
+
+    /**
+     * Fetches a billing request
+     *
+     * @param billingRequestId The Billing Request to collect customer details.
+     * @return An [ApiResult] containing the Billing Request or an error.
+     */
+    suspend fun getBillingRequest(billingRequestId: String): ApiResult<BillingRequest> {
+        val response = goCardlessAPI.getBillingRequest(billingRequestId)
+
+        return if (response.isSuccessful) {
+            ApiSuccess(response.body()?.billingRequests ?: BillingRequest())
+        } else {
+            val error = errorMapper.process(response.code(), response.errorBody()?.charStream())
+            ApiError(error)
+        }
+    }
+
+    /**
+     * Returns a cursor-paginated list of your billing requests.
+     *
+     * @return An [ApiResult] containing the list of Billing Request or an error.
+     */
+    suspend fun listBillingRequests(): ApiResult<BillingRequestList> {
+        val response = goCardlessAPI.getBillingRequests()
+
+        return if (response.isSuccessful) {
+            ApiSuccess(response.body() ?: BillingRequestList())
         } else {
             val error = errorMapper.process(response.code(), response.errorBody()?.charStream())
             ApiError(error)
