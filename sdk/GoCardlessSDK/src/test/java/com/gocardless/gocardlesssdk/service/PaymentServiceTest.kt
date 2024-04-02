@@ -43,7 +43,7 @@ class PaymentServiceTest {
         mockWebServer.successResponse("./payments/success.json")
 
         // When
-        val result = service.getPaymentRequest(paymentRequestId)
+        val result = service.getPayment(paymentRequestId)
 
         // Then
         if (result is ApiSuccess) {

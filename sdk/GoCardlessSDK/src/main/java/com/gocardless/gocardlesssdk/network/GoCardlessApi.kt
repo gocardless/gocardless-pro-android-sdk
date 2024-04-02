@@ -4,7 +4,7 @@ import com.gocardless.gocardlesssdk.model.BillingRequestFlowWrapper
 import com.gocardless.gocardlesssdk.model.BillingRequestList
 import com.gocardless.gocardlesssdk.model.BillingRequestWrapper
 import com.gocardless.gocardlesssdk.model.GenericRequest
-import com.gocardless.gocardlesssdk.model.PaymentRequestWrapper
+import com.gocardless.gocardlesssdk.model.PaymentWrapper
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -50,11 +50,11 @@ interface GoCardlessApi {
      * Creates a new payment object.
      */
     @POST("payments")
-    suspend fun createPayment(@Body request: PaymentRequestWrapper): Response<PaymentRequestWrapper>
+    suspend fun createPayment(@Body request: PaymentWrapper): Response<PaymentWrapper>
 
     /**
      * Retrieves the details of a single existing payment.
      */
-    @GET("payments/{paymentRequestId}")
-    suspend fun getPaymentRequest(@Path("paymentRequestId") paymentRequestId: String): Response<PaymentRequestWrapper>
+    @GET("payments/{paymentId}")
+    suspend fun getPayment(@Path("paymentId") paymentId: String): Response<PaymentWrapper>
 }

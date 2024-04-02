@@ -2,7 +2,7 @@ package com.gocardless.app
 
 import android.app.Application
 import com.gocardless.gocardlesssdk.GoCardlessSDK
-import com.gocardless.gocardlesssdk.model.Environment
+import com.gocardless.gocardlesssdk.network.Environment
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp

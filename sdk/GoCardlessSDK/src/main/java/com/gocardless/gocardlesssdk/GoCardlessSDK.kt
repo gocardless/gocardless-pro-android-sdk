@@ -1,7 +1,7 @@
 package com.gocardless.gocardlesssdk
 
 import com.gocardless.gocardlesssdk.error.ErrorMapper
-import com.gocardless.gocardlesssdk.model.Environment
+import com.gocardless.gocardlesssdk.network.Environment
 import com.gocardless.gocardlesssdk.network.GoCardlessApi
 import com.gocardless.gocardlesssdk.network.HeaderInterceptor
 import com.gocardless.gocardlesssdk.service.BillingRequestFlowService

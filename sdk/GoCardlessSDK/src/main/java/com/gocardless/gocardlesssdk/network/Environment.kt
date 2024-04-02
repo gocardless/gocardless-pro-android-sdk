@@ -1,4 +1,4 @@
-package com.gocardless.gocardlesssdk.model
+package com.gocardless.gocardlesssdk.network
 
 enum class Environment(val baseUrl: String) {
     Live("https://api.gocardless.com"),

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import java.util.Date
 
 /**
- * Payment objects represent payments from a customer to a creditor,
+ * Payment objects represent payments from a customer to a creditor
  */
 data class Payment(
     /**
@@ -56,7 +56,7 @@ data class Payment(
      */
     @SerializedName("retry_if_possible") var retryIfPossible: Boolean? = null,
     /**
-     * On failure, automatically retry the payment using intelligent retries. Default is false.
+     * Payment Status
      */
     @SerializedName("status") var status: PaymentStatus? = null,
     /**

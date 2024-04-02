@@ -8,7 +8,7 @@ import java.io.Reader
  */
 class ErrorMapper(private val gson: Gson) {
     /**
-     * Maps an error response to an exception.
+     * Maps an error response to a [GoCardlessError].
      * @param code HTTP status code.
      * @param reader Char stream of the response body
      */

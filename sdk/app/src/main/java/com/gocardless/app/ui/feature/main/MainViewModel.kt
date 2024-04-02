@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.gocardless.gocardlesssdk.GoCardlessSDK
 import com.gocardless.gocardlesssdk.model.BillingRequest
 import com.gocardless.gocardlesssdk.model.Customer
+import com.gocardless.gocardlesssdk.network.ApiError
 import com.gocardless.gocardlesssdk.network.ApiSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,18 +34,19 @@ class MainViewModel @Inject constructor() : ViewModel() {
     fun fetchCustomers() {
         _uiState.value = MainUiState.Loading
         viewModelScope.launch {
-            GoCardlessSDK.billingRequestService
             val response = GoCardlessSDK.billingRequestService.createBillingRequest(
                 BillingRequest(
 
                 )
             )
 
-            if (response is ApiSuccess) {
-//                response.value
-//                _uiState.value = MainUiState.Success(response.value)
-            } else {
-                _uiState.value = MainUiState.Error("Couldn't fetch")
+            when(response) {
+                is ApiSuccess -> {
+                    //_uiState.value = MainUiState.Success(response.value)
+                }
+                is ApiError -> {
+                    _uiState.value = MainUiState.Error("Couldn't fetch")
+                }
             }
         }
     }

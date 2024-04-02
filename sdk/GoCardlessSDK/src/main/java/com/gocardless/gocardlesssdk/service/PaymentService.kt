@@ -2,7 +2,7 @@ package com.gocardless.gocardlesssdk.service
 
 import com.gocardless.gocardlesssdk.error.ErrorMapper
 import com.gocardless.gocardlesssdk.model.Payment
-import com.gocardless.gocardlesssdk.model.PaymentRequestWrapper
+import com.gocardless.gocardlesssdk.model.PaymentWrapper
 import com.gocardless.gocardlesssdk.network.ApiError
 import com.gocardless.gocardlesssdk.network.ApiResult
 import com.gocardless.gocardlesssdk.network.ApiSuccess
@@ -26,7 +26,7 @@ class PaymentService(
      * @return An [ApiResult] containing the created Billing Request or an error.
      */
     suspend fun createPaymentRequest(payment: Payment): ApiResult<Payment> {
-        val response = goCardlessAPI.createPayment(PaymentRequestWrapper(payment))
+        val response = goCardlessAPI.createPayment(PaymentWrapper(payment))
 
         return if (response.isSuccessful) {
             ApiSuccess(response.body()?.payments ?: payment)
@@ -42,8 +42,8 @@ class PaymentService(
      * @param paymentId The Payment Id.
      * @return An [ApiResult] containing the Payment Request or an error.
      */
-    suspend fun getPaymentRequest(paymentId: String): ApiResult<Payment> {
-        val response = goCardlessAPI.getPaymentRequest(paymentId)
+    suspend fun getPayment(paymentId: String): ApiResult<Payment> {
+        val response = goCardlessAPI.getPayment(paymentId)
 
         return if (response.isSuccessful) {
             ApiSuccess(response.body()?.payments ?: Payment())
