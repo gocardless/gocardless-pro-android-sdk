@@ -11,7 +11,7 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v2
         with:
-          java-version: "1111111111111111111111"
+          java-version: "11"
           distribution: "adopt"
 
       #Authorizing gradlew files
