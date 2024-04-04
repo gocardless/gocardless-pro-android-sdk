@@ -14,16 +14,14 @@ jobs:
           java-version: "11"
           distribution: "adopt"
 
-      #Navigate to sdk folder
-      - name: Navigate to sdk folder
-        run: cd sdk
-
       #Authorizing gradlew files
       - name: Grant execute permission for gradlew
+        working-directory: ./sdk
         run: chmod +x gradlew
 
       #Build project
       - name: Build SDK with Gradle
+        working-directory: ./sdk
         run: ./gradlew GoCardlessSDK:assemble
 
       #After decoding the secret key, place the file in ~ /. Gradle/ secring.gpg
@@ -33,7 +31,8 @@ jobs:
           base64 -d ~/.gradle/secring.gpg.b64 > ~/.gradle/secring.gpg
 
       - name: Publish package
-        run: ./gradlew publishToSonatype closeAndReleaseStagingRepository -Psigning.keyId=${{secrets.SIGNING_KEY_ID}} -Psigning.password=${{secrets.SIGNING_KEY_PASSWORD}} -Psigning.secretKeyRingFile=$(echo ~/.gradle/secring.gpg) -Dorg.gradle.internal.http.socketTimeout=300000 --stacktrace
+        working-directory: ./sdk
+        run: ./gradlew GoCardlessSDK:publish -Psigning.keyId=${{secrets.SIGNING_KEY_ID}} -Psigning.password=${{secrets.SIGNING_KEY_PASSWORD}} -Psigning.secretKeyRingFile=$(echo ~/.gradle/secring.gpg) -Dorg.gradle.internal.http.socketTimeout=300000 --stacktrace
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
