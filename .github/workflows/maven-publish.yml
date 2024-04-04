@@ -20,7 +20,7 @@ jobs:
 
       #Build project
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./sdk/gradlew build
 
       #After decoding the secret key, place the file in ~ /. Gradle/ secring.gpg
       - name: Decode
