@@ -1,8 +1,8 @@
-import java.util.Properties
-
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("maven-publish")
+    id("signing")
 }
 
 android {
@@ -20,8 +20,8 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
             )
         }
     }
@@ -31,6 +31,69 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+}
+
+afterEvaluate {
+    configure<PublishingExtension> {
+        publications {
+            register<MavenPublication>("release") {
+                groupId = "com.gocardless"
+                artifactId = "gocardlesssdk"
+                version = "1.0.0"
+
+                afterEvaluate {
+                    from(components["release"])
+                }
+
+                pom {
+                    name.set("GoCardless Android Client")
+                    packaging = "aar"
+                    description.set("Client library for accessing the GoCardless API")
+                    url.set("http://developer.gocardless.com/")
+
+                    scm {
+                        url.set("scm:git@github.com:gocardless/gocardless-pro-android-sdk.git")
+                        connection.set("scm:git@github.com:gocardless/gocardless-pro-android-sdk.git")
+                        developerConnection.set("scm:git@github.com:gocardless/gocardless-pro-android-sdk.git")
+                    }
+
+                    licenses {
+                        license {
+                            name.set("MIT")
+                            url.set("http://www.opensource.org/licenses/mit-license.php")
+                            distribution.set("repo")
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            name.set("GoCardless Ltd")
+                            email.set("client-libraries@gocardless.com")
+                        }
+                    }
+                }
+            }
+        }
+
+        repositories {
+            maven {
+                name = "OSSRH"
+                url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2")
+
+                credentials {
+                    username = System.getenv("MAVEN_USERNAME")
+                    password = System.getenv("MAVEN_PASSWORD")
+                }
+            }
+        }
     }
 }
 
