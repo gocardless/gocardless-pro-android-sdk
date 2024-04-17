@@ -94,6 +94,10 @@ afterEvaluate {
                 }
             }
         }
+
+        signing {
+            sign(publishing.publications)
+        }
     }
 }
 
