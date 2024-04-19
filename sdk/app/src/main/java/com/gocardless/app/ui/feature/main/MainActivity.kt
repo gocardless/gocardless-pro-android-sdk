@@ -8,6 +8,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -47,11 +48,23 @@ class MainActivity : ComponentActivity() {
                             Screen(viewModel = viewModel, action = this::openUrl)
                         },
                         content = {
-                            Box(modifier = Modifier.padding(top = it.calculateTopPadding())) {
+                            Column(modifier = Modifier.padding(top = it.calculateTopPadding())) {
                                 Button(onClick = {
                                     viewModel.createSinglePayment()
                                 }) {
-                                    Text("Create IBP Payments")
+                                    Text("Create IBP Payment")
+                                }
+
+                                Button(onClick = {
+                                    viewModel.createMandate()
+                                }) {
+                                    Text("Create DD Mandate")
+                                }
+
+                                Button(onClick = {
+                                    viewModel.createVRPMandate()
+                                }) {
+                                    Text("Create VRP Mandate")
                                 }
                             }
                         }

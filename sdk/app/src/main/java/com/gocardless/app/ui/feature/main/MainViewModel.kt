@@ -1,16 +1,17 @@
 package com.gocardless.app.ui.feature.main
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gocardless.gocardlesssdk.GoCardlessSDK
 import com.gocardless.gocardlesssdk.model.BillingRequest
 import com.gocardless.gocardlesssdk.model.BillingRequestFlow
-import com.gocardless.gocardlesssdk.model.Customer
 import com.gocardless.gocardlesssdk.model.Links
+import com.gocardless.gocardlesssdk.model.MandateConstraints
+import com.gocardless.gocardlesssdk.model.MandateRequest
 import com.gocardless.gocardlesssdk.model.PaymentRequest
+import com.gocardless.gocardlesssdk.model.Period
+import com.gocardless.gocardlesssdk.model.PeriodicLimit
 import com.gocardless.gocardlesssdk.network.ApiError
-import com.gocardless.gocardlesssdk.network.ApiResult
 import com.gocardless.gocardlesssdk.network.ApiSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,38 +33,74 @@ class MainViewModel @Inject constructor() : ViewModel() {
     val uiState: StateFlow<MainUiState> = _uiState
 
     fun createSinglePayment() {
-        _uiState.value = MainUiState.Loading
-        viewModelScope.launch {
+        createBillingRequestFlow(
+            BillingRequest(
+                paymentRequest = PaymentRequest(
+                    currency = "GBP",
+                    amount = 1,
+                    description = "Description"
+                )
+            )
+        )
+    }
 
-            val brf = createBRF(
-                BillingRequest(
-                    paymentRequest = PaymentRequest(
-                        currency = "GBP",
-                        amount = 1,
-                        description = "Description"
+    fun createMandate() {
+        createBillingRequestFlow(
+            BillingRequest(
+                mandateRequest = MandateRequest(
+                    currency = "GBP",
+                    description = "Description"
+                )
+            )
+        )
+    }
+
+    fun createVRPMandate() {
+        createBillingRequestFlow(
+            BillingRequest(
+                mandateRequest = MandateRequest(
+                    currency = "GBP",
+                    description = "Description",
+                    scheme = "faster_payments",
+                    sweeping = true,
+                    constraints = MandateConstraints(
+                        maxAmountPerPayment = 100,
+                        periodicLimits = listOf(PeriodicLimit(
+                            period = Period.MONTH,
+                            maxTotalAmount = 100,
+                        ))
                     )
                 )
             )
+        )
+    }
 
-            if (brf != null) {
-                _uiState.value = MainUiState.Success(brf)
-            } else {
-                _uiState.value = MainUiState.Error("Error creating Billing Request")
+    private fun createBillingRequestFlow(br: BillingRequest) {
+        _uiState.value = MainUiState.Loading
+        viewModelScope.launch {
+
+            val brResponse = GoCardlessSDK.billingRequestService.createBillingRequest(br)
+            when (brResponse) {
+                is ApiSuccess -> {
+                    val brfResponse =
+                        GoCardlessSDK.billingRequestFlowService.createBillingRequestFlow(
+                            BillingRequestFlow(
+                                links = Links(billingRequest = brResponse.value.id)
+                            )
+                        )
+                    when (brfResponse) {
+                        is ApiSuccess -> _uiState.value = MainUiState.Success(brfResponse.value)
+                        is ApiError -> returnError(brfResponse)
+                    }
+                }
+
+                is ApiError -> returnError(brResponse)
             }
         }
     }
 
-    private suspend fun createBRF(br: BillingRequest): BillingRequestFlow? {
-        val brResponse = GoCardlessSDK.billingRequestService.createBillingRequest(br)
-        if (brResponse is ApiSuccess) {
-            val brfResponse =
-                GoCardlessSDK.billingRequestFlowService.createBillingRequestFlow(
-                    BillingRequestFlow(
-                        links = Links(billingRequest = brResponse.value.id)
-                    )
-                )
-            return if (brfResponse is ApiSuccess) brfResponse.value else null
-        }
-        return null
+    private fun returnError(er: ApiError<*>) {
+        _uiState.value =
+            MainUiState.Error("Error creating Billing Request ${er.error?.errorDetail}")
     }
 }

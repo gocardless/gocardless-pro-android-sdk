@@ -16,7 +16,7 @@ data class MandateRequest(
      * Constraints that will apply to the mandate_request. (Optional) Specifically for PayTo and
      * VRP.
      */
-    @SerializedName("constraints") var constraints: String? = null,
+    @SerializedName("constraints") var constraints: MandateConstraints? = null,
     /**
      * A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
      * "betalingsservice", "faster_payments", "pad", "pay_to" and "sepa_core" are supported.
