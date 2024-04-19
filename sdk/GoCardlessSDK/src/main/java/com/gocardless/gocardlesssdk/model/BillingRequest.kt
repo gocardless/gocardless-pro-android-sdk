@@ -20,21 +20,21 @@ data class BillingRequest(
      * `fulfilled`: the billing request has been fulfilled and a payment created
      * `cancelled`: the billing request has been cancelled and cannot be used
      */
-    @SerializedName("status") var status: BillingRequestStatus? = BillingRequestStatus.UNKNOWN,
+    @SerializedName("status") var status: BillingRequestStatus? = null,
     /**
      * Request for a mandate
      */
-    @SerializedName("mandate_request") var mandateRequest: MandateRequest? = MandateRequest(),
+    @SerializedName("mandate_request") var mandateRequest: MandateRequest? = null,
     /**
      * Request for a one-off strongly authorised payment
      */
-    @SerializedName("payment_request") var paymentRequest: PaymentRequest? = PaymentRequest(),
+    @SerializedName("payment_request") var paymentRequest: PaymentRequest? = null,
     /**
      * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
      * characters and values up to 500 characters.
      */
-    @SerializedName("metadata") var metadata: MetaData? = MetaData(),
-    @SerializedName("links") var links: Links? = Links(),
+    @SerializedName("metadata") var metadata: MetaData? = null,
+    @SerializedName("links") var links: Links? = null,
     /**
      * (Optional) If true, this billing request can fallback from instant payment to direct debit.
      * Should not be set if GoCardless payment intelligence feature is used.
@@ -53,8 +53,8 @@ data class BillingRequest(
     /**
      * List of actions that can be performed before this billing request can be fulfilled.
      */
-    @SerializedName("actions") var actions: ArrayList<Action> = arrayListOf(),
-    @SerializedName("resources") var resources: Resources? = Resources(),
+    @SerializedName("actions") var actions: ArrayList<Action>? = null,
+    @SerializedName("resources") var resources: Resources? = null,
 )
 
 /**

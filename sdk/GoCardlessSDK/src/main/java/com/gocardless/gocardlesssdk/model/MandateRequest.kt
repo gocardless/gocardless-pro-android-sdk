@@ -49,12 +49,12 @@ data class MandateRequest(
      * for more information.
      */
     @SerializedName("verify") var verify: MandateVerify? = null,
-    @SerializedName("links") var links: Links? = Links(),
+    @SerializedName("links") var links: Links? = null,
     /**
      * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
      * characters and values up to 500 characters.
      */
-    @SerializedName("metadata") var metadata: MetaData? = MetaData(),
+    @SerializedName("metadata") var metadata: MetaData? = null,
     /**
      * A human-readable description of the payment and/or mandate. This will be displayed to the
      * payer when authorising the billing request.

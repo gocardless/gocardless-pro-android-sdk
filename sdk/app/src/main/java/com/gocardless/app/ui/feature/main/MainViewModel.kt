@@ -5,8 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gocardless.gocardlesssdk.GoCardlessSDK
 import com.gocardless.gocardlesssdk.model.BillingRequest
+import com.gocardless.gocardlesssdk.model.BillingRequestFlow
 import com.gocardless.gocardlesssdk.model.Customer
+import com.gocardless.gocardlesssdk.model.Links
+import com.gocardless.gocardlesssdk.model.PaymentRequest
 import com.gocardless.gocardlesssdk.network.ApiError
+import com.gocardless.gocardlesssdk.network.ApiResult
 import com.gocardless.gocardlesssdk.network.ApiSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +21,7 @@ import javax.inject.Inject
 sealed class MainUiState {
     object Init : MainUiState()
     object Loading : MainUiState()
-    data class Success(val customers: String) : MainUiState()
+    data class Success(val billingRequestFlow: BillingRequestFlow) : MainUiState()
     data class Error(val message: String) : MainUiState()
 }
 
@@ -27,37 +31,39 @@ class MainViewModel @Inject constructor() : ViewModel() {
     private val _uiState = MutableStateFlow<MainUiState>(MainUiState.Init)
     val uiState: StateFlow<MainUiState> = _uiState
 
-    init {
-        fetchCustomers()
-    }
-
-    fun fetchCustomers() {
+    fun createSinglePayment() {
         _uiState.value = MainUiState.Loading
         viewModelScope.launch {
-            val response = GoCardlessSDK.billingRequestService.createBillingRequest(
-                BillingRequest(
 
+            val brf = createBRF(
+                BillingRequest(
+                    paymentRequest = PaymentRequest(
+                        currency = "GBP",
+                        amount = 1,
+                        description = "Description"
+                    )
                 )
             )
 
-            when(response) {
-                is ApiSuccess -> {
-                    //_uiState.value = MainUiState.Success(response.value)
-                }
-                is ApiError -> {
-                    _uiState.value = MainUiState.Error("Couldn't fetch")
-                }
+            if (brf != null) {
+                _uiState.value = MainUiState.Success(brf)
+            } else {
+                _uiState.value = MainUiState.Error("Error creating Billing Request")
             }
         }
     }
 
-    fun deleteCustomer(customer: Customer) {
-        _uiState.value = MainUiState.Loading
-        viewModelScope.launch {
+    private suspend fun createBRF(br: BillingRequest): BillingRequestFlow? {
+        val brResponse = GoCardlessSDK.billingRequestService.createBillingRequest(br)
+        if (brResponse is ApiSuccess) {
+            val brfResponse =
+                GoCardlessSDK.billingRequestFlowService.createBillingRequestFlow(
+                    BillingRequestFlow(
+                        links = Links(billingRequest = brResponse.value.id)
+                    )
+                )
+            return if (brfResponse is ApiSuccess) brfResponse.value else null
         }
-    }
-
-    fun addCustomer(first: String, second: String) {
-        Log.i("gunhanx", " add: $first $second")
+        return null
     }
 }

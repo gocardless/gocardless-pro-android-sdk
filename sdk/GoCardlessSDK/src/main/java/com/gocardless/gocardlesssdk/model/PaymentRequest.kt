@@ -42,11 +42,11 @@ data class PaymentRequest(
      * for your customer.
      */
     @SerializedName("scheme") var scheme: String? = null,
-    @SerializedName("links") var links: Links? = Links(),
+    @SerializedName("links") var links: Links? = null,
     /**
      * Key-value store of custom data. Up to 3 keys are permitted, with key names up to 50
      * characters and values up to 500 characters.
      */
-    @SerializedName("metadata") var metadata: MetaData? = MetaData(),
+    @SerializedName("metadata") var metadata: MetaData? = null,
     @SerializedName("flexible_amount") var flexibleAmount: Boolean? = null
 )

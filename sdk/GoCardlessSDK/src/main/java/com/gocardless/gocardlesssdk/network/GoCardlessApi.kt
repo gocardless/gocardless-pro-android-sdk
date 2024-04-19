@@ -31,8 +31,8 @@ interface GoCardlessApi {
     /**
      * Create a Billing Request Flow that can be used for your customer to authorise payments
      */
-    @POST("billing_flow_requests")
-    suspend fun billingFlowRequests(@Body request: BillingRequestFlowWrapper): Response<BillingRequestFlowWrapper>
+    @POST("billing_request_flows")
+    suspend fun billingRequestFlow(@Body request: BillingRequestFlowWrapper): Response<BillingRequestFlowWrapper>
 
     /**
      * Fetches a billing request
