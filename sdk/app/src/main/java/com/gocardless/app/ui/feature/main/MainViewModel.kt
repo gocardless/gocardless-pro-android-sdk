@@ -97,7 +97,9 @@ class MainViewModel @Inject constructor() : ViewModel() {
                             )
                         )
                     when (brfResponse) {
-                        is ApiSuccess -> _uiState.value = MainUiState.Success(brfResponse.value.authorisationUrl)
+                        is ApiSuccess -> _uiState.value =
+                            MainUiState.Success(brfResponse.value.authorisationUrl)
+
                         is ApiError -> returnError(brfResponse)
                     }
                 }
@@ -170,7 +172,9 @@ class MainViewModel @Inject constructor() : ViewModel() {
 
                     when (brCreateAuthorisationResponse) {
                         is ApiSuccess -> _uiState.value = MainUiState.Success(
-                            brCreateAuthorisationResponse.value.url!!)
+                            brCreateAuthorisationResponse.value.url!!
+                        )
+
                         is ApiError -> returnError(brCreateAuthorisationResponse)
                     }
                 }

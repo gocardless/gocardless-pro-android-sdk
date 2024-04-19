@@ -21,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.gocardless.app.App
 import com.gocardless.app.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 

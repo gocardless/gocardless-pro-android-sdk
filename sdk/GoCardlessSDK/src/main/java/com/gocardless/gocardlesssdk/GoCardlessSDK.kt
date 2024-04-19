@@ -1,6 +1,5 @@
 package com.gocardless.gocardlesssdk
 
-import android.util.Log
 import com.gocardless.gocardlesssdk.error.ErrorMapper
 import com.gocardless.gocardlesssdk.network.Environment
 import com.gocardless.gocardlesssdk.network.GoCardlessApi
@@ -59,12 +58,12 @@ object GoCardlessSDK {
         val headerInterceptor = HeaderInterceptor(accessToken)
 
         val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.level =HttpLoggingInterceptor.Level.BODY
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         val client = OkHttpClient
             .Builder()
             .addInterceptor(headerInterceptor)
             .addInterceptor(loggingInterceptor)
-                .build()
+            .build()
 
         val gson = GsonBuilder()
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
