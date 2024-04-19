@@ -9,6 +9,12 @@ enum class BillingRequestActionType(val value: String) {
     @SerializedName("collect_bank_account")
     CollectBankAccount("collect_bank_account"),
 
+    @SerializedName("select_institution")
+    SelectInstitution("select_institution"),
+
+    @SerializedName("bank_authorisation")
+    BankAuthorisation("bank_authorisation"),
+
     @SerializedName("confirm_payer_details")
     ConfirmPayerDetails("confirm_payer_details"),
 

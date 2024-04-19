@@ -1,5 +1,6 @@
 package com.gocardless.gocardlesssdk.network
 
+import com.gocardless.gocardlesssdk.model.BankAuthorisationWrapper
 import com.gocardless.gocardlesssdk.model.BillingRequestFlowWrapper
 import com.gocardless.gocardlesssdk.model.BillingRequestList
 import com.gocardless.gocardlesssdk.model.BillingRequestWrapper
@@ -27,6 +28,12 @@ interface GoCardlessApi {
         @Path("billingRequestId") billingRequestId: String,
         @Path("actionName") actionName: String
     ): Response<BillingRequestWrapper>
+
+    /**
+     * Create an authorisation for the user to authorise
+     */
+    @POST("bank_authorisations")
+    suspend fun bankAuthorisation(@Body request: BankAuthorisationWrapper): Response<BankAuthorisationWrapper>
 
     /**
      * Create a Billing Request Flow that can be used for your customer to authorise payments

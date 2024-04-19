@@ -7,7 +7,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -20,9 +19,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.gocardless.app.App
 import com.gocardless.app.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -66,6 +65,12 @@ class MainActivity : ComponentActivity() {
                                 }) {
                                     Text("Create VRP Mandate")
                                 }
+
+                                Button(onClick = {
+                                    viewModel.createCustomPagePayment()
+                                }) {
+                                    Text("Create no UI payment for test user")
+                                }
                             }
                         }
                     )
@@ -85,7 +90,7 @@ fun Screen(viewModel: MainViewModel, action: (String?) -> Unit) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
     when (val uiStateValue = uiState.value) {
-        is MainUiState.Success -> action(uiStateValue.billingRequestFlow.authorisationUrl)
+        is MainUiState.Success -> action(uiStateValue.url)
         is MainUiState.Error -> Message(name = uiStateValue.message)
         MainUiState.Init -> Message(name = "Welcome")
         MainUiState.Loading -> Message(name = "Loading")
