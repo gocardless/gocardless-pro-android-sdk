@@ -33,8 +33,8 @@ data class BillingRequestFlow(
     @SerializedName("session_token") var sessionToken: String? = null,
     @SerializedName("expires_at") var expiresAt: Date? = null,
     @SerializedName("created_at") var createdAt: Date? = null,
-    @SerializedName("links") var links: Links? = Links(),
-    @SerializedName("config") var config: Config? = Config(),
+    @SerializedName("links") var links: Links? = null,
+    @SerializedName("config") var config: Config? = null,
     @SerializedName("redirect_flow_id") var redirectFlowId: String? = null,
     /**
      * If true, the payer will be able to see redirect action buttons on Thank You page.

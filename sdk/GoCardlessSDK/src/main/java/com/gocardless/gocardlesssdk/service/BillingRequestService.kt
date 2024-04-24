@@ -1,6 +1,8 @@
 package com.gocardless.gocardlesssdk.service
 
 import com.gocardless.gocardlesssdk.error.ErrorMapper
+import com.gocardless.gocardlesssdk.model.BankAuthorisation
+import com.gocardless.gocardlesssdk.model.BankAuthorisationWrapper
 import com.gocardless.gocardlesssdk.model.BillingRequest
 import com.gocardless.gocardlesssdk.model.BillingRequestActionType
 import com.gocardless.gocardlesssdk.model.BillingRequestList
@@ -11,6 +13,7 @@ import com.gocardless.gocardlesssdk.model.ConfirmPayerDetailsRequest
 import com.gocardless.gocardlesssdk.model.GenericRequest
 import com.gocardless.gocardlesssdk.model.MetaData
 import com.gocardless.gocardlesssdk.model.NotifyActionRequest
+import com.gocardless.gocardlesssdk.model.SelectInstitution
 import com.gocardless.gocardlesssdk.network.ApiError
 import com.gocardless.gocardlesssdk.network.ApiResult
 import com.gocardless.gocardlesssdk.network.ApiSuccess
@@ -102,6 +105,53 @@ class BillingRequestService(
 
         return if (response.isSuccessful) {
             ApiSuccess(response.body()?.billingRequests ?: BillingRequest())
+        } else {
+            val error = errorMapper.process(response.code(), response.errorBody()?.charStream())
+            ApiError(error)
+        }
+    }
+
+    /**
+     * Creates an Institution object and attaches it to the Billing Request
+     *
+     * @param billingRequestId The Billing Request to select institution.
+     * @param selectInstitution The institution details
+     */
+    suspend fun selectInstitution(
+        billingRequestId: String,
+        selectInstitution: SelectInstitution,
+    ): ApiResult<BillingRequest> {
+        val response = goCardlessAPI.billingRequestsActions(
+            GenericRequest(selectInstitution),
+            billingRequestId,
+            BillingRequestActionType.SelectInstitution.value
+        )
+
+        return if (response.isSuccessful) {
+            ApiSuccess(response.body()?.billingRequests ?: BillingRequest())
+        } else {
+            val error = errorMapper.process(response.code(), response.errorBody()?.charStream())
+            ApiError(error)
+        }
+    }
+
+    /**
+     * Bank Authorisations can be used to authorise Billing Requests. Authorisations are created against a specific bank, usually the bank that provides the payer’s account.
+     *
+     * Creation of Bank Authorisations is only permitted from GoCardless hosted UIs (see Billing Request Flows) to ensure we meet regulatory requirements for checkout flows.
+     *
+     * @param billingRequestId The Billing Request to authorise.
+     * @param bankAuthorisation the authorisation details
+     */
+    suspend fun createBankAuthorisation(
+        bankAuthorisation: BankAuthorisation,
+    ): ApiResult<BankAuthorisation> {
+        val response = goCardlessAPI.bankAuthorisation(
+            BankAuthorisationWrapper(bankAuthorisation)
+        )
+
+        return if (response.isSuccessful) {
+            ApiSuccess(response.body()?.bankAuthorisations ?: BankAuthorisation())
         } else {
             val error = errorMapper.process(response.code(), response.errorBody()?.charStream())
             ApiError(error)

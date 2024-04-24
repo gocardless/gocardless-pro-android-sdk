@@ -21,7 +21,7 @@ class BillingRequestFlowService(
      */
     suspend fun createBillingRequestFlow(billingRequestFlow: BillingRequestFlow): ApiResult<BillingRequestFlow> {
         val response =
-            goCardlessAPI.billingFlowRequests(BillingRequestFlowWrapper(billingRequestFlow))
+            goCardlessAPI.billingRequestFlow(BillingRequestFlowWrapper(billingRequestFlow))
 
         return if (response.isSuccessful) {
             ApiSuccess(response.body()?.billingRequestFlow ?: billingRequestFlow)

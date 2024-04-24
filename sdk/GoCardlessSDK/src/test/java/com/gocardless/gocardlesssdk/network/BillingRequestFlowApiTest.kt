@@ -49,7 +49,7 @@ class BillingRequestFlowApiTest {
         )
 
         // When
-        val result = api.billingFlowRequests(BillingRequestFlowWrapper(billingRequestFlow))
+        val result = api.billingRequestFlow(BillingRequestFlowWrapper(billingRequestFlow))
         val body = result.body()
 
         // Then
@@ -85,7 +85,7 @@ class BillingRequestFlowApiTest {
         )
 
         // When
-        val result = api.billingFlowRequests(BillingRequestFlowWrapper(billingRequestFlow))
+        val result = api.billingRequestFlow(BillingRequestFlowWrapper(billingRequestFlow))
         val body = result.body()
 
         // Then

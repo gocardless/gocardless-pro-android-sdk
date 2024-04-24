@@ -11,8 +11,12 @@ class App : Application() {
         super.onCreate()
 
         GoCardlessSDK.initSDK(
-            "ENTER_YOUR_ACCESS_TOKEN",
-            Environment.Sandbox
+            "",
+            environment
         )
+    }
+
+    companion object {
+        val environment = Environment.Sandbox
     }
 }

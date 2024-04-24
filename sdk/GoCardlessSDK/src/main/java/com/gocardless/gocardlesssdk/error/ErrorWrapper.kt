@@ -17,5 +17,7 @@ data class ErrorDetail(
 
 data class ErrorReason(
     @SerializedName("reason") var reason: String? = null,
-    @SerializedName("message") var message: String? = null
+    @SerializedName("field") var field: String? = null,
+    @SerializedName("message") var message: String? = null,
+    @SerializedName("request_pointer") var requestPointer: String? = null
 )

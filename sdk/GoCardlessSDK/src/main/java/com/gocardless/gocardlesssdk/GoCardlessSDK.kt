@@ -9,6 +9,7 @@ import com.gocardless.gocardlesssdk.service.BillingRequestService
 import com.gocardless.gocardlesssdk.service.PaymentService
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -56,9 +57,12 @@ object GoCardlessSDK {
     private fun registerDependencies(accessToken: String, environment: Environment) {
         val headerInterceptor = HeaderInterceptor(accessToken)
 
+        val loggingInterceptor = HttpLoggingInterceptor()
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         val client = OkHttpClient
             .Builder()
             .addInterceptor(headerInterceptor)
+            .addInterceptor(loggingInterceptor)
             .build()
 
         val gson = GsonBuilder()
