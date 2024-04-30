@@ -10,7 +10,7 @@ The app provides a clear and practical example of how to implement GoCardless pa
 <dependency>
     <groupId>com.gocardless</groupId>
     <artifactId>gocardlesssdk</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
