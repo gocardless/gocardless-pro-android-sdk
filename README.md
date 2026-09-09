@@ -1,3 +1,5 @@
+> **⚠️ This repository is archived.** It is no longer maintained and is kept for historical reference only.
+
 # GoCardless SDK Example App
 
 The GoCardless Android SDK is a tool that enables developers to integrate GoCardless payments into their Android applications. 
