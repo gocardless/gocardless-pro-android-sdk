@@ -47,7 +47,7 @@ afterEvaluate {
             register<MavenPublication>("release") {
                 groupId = "com.gocardless"
                 artifactId = "gocardlesssdk"
-                version = "1.0.0"
+                version = "1.0.2"
 
                 afterEvaluate {
                     from(components["release"])
@@ -104,7 +104,6 @@ afterEvaluate {
 dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation("com.google.code.gson:gson:2.10.1")
 
     // Unit Tests
