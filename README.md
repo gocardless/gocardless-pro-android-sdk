@@ -1,3 +1,5 @@
+> **⚠️ This repository is archived.** It is no longer maintained and is kept for historical reference only.
+
 # GoCardless SDK Example App
 
 > **⚠️ This repository is archived.** It is no longer maintained and is kept for historical reference only.
